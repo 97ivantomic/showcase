@@ -42,7 +42,7 @@ export class BinaryTree<TValue = undefined> implements Searchable {
 }
 
 export class InvalidBranchValue extends Error {
-  constructor(message: string = "") {
+  constructor(message = "") {
     super(message);
     this.name = "InvalidBranchValue";
   }
