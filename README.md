@@ -2,9 +2,8 @@
 
 This repo is my playground for data structures and algorithms.
 
-I've made it public to serve as an example of my style of coding
-(and maybe some analytical skills or technical knowledge, but mostly
-style).
+Due a lack of an actual open-source project to share, I've made this
+one public to serve as an example of my coding style (and maybe of some analytical skills or technical knowledge, but mostly style).
 
 For example, I tend to favor readability over everything else
 and like making unit tests go from red to green.
