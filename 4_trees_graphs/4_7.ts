@@ -112,4 +112,13 @@ export class Project {
   }
 }
 
-export const solutions = [new BruteForceSolution()];
+export class DepthFirstSearchSolution implements Solution {
+  findProjectBuildOrder(graph: DependencyGraph): ProjectBuildOrder | null {
+    return null;
+  }
+}
+
+export const solutions = [
+  new BruteForceSolution(),
+  // new DepthFirstSearchSolution(),
+];
