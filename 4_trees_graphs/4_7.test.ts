@@ -1,11 +1,4 @@
-import {
-  BruteForceSolution,
-  DependencyGraph,
-  Project,
-  ProjectNotFound,
-} from "./4_7";
-
-const solutions = [new BruteForceSolution()];
+import { DependencyGraph, Project, ProjectNotFound, solutions } from "./4_7";
 
 describe.each(solutions)("findProjectBuildOrder", (solution) => {
   const name = solution.constructor.name;

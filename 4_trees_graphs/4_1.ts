@@ -51,3 +51,8 @@ export class BidirectionalSearchSolution implements Solution {
     }
   }
 }
+
+export const solutions = [
+  new BruteForceSolution(),
+  // new BidirectionalSearchSolution(),
+];

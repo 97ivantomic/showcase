@@ -54,3 +54,5 @@ export class OfficialSolution implements Solution {
     return node;
   }
 }
+
+export const solutions = [new MySolution(), new OfficialSolution()];

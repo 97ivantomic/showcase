@@ -107,3 +107,9 @@ export class BottomUpSolution implements Solution {
     throw new Error("Not implemented.");
   }
 }
+
+export const solutions = [
+  new BruteForceSolution(),
+  new TopDownSolution(),
+  // new BottomUpSolution(),
+];

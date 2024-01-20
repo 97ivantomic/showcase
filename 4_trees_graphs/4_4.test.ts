@@ -1,17 +1,6 @@
 import { BinaryTree } from "../models/graph";
 
-import {
-  TopDownSolution,
-  BruteForceSolution,
-  Solution,
-  // BottomUpSolution,
-} from "./4_4";
-
-const solutions: Solution[] = [
-  new BruteForceSolution(),
-  new TopDownSolution(),
-  // new BottomUpSolution(),
-];
+import { solutions } from "./4_4";
 
 describe.each(solutions)("isBalanced", (solution) => {
   const name = solution.constructor.name;

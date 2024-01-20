@@ -89,3 +89,9 @@ export class OfficialSolution implements Solution {
     return leftmost;
   }
 }
+
+export const solutions = [
+  new BruteForceSolution(),
+  new WrongHintBasedSolution(),
+  new OfficialSolution(),
+];

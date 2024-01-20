@@ -155,3 +155,9 @@ export class HintBasedSolution implements Solution {
     );
   }
 }
+
+export const solutions = [
+  new BruteForceSolution(),
+  new OptimizedSolution(),
+  new HintBasedSolution(),
+];

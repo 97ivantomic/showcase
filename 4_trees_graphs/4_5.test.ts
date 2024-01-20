@@ -1,16 +1,6 @@
 import { BinaryTree } from "../models/graph";
 
-import {
-  BruteForceSolution,
-  OptimizedSolution,
-  HintBasedSolution,
-} from "./4_5";
-
-const solutions = [
-  new BruteForceSolution(),
-  new OptimizedSolution(),
-  new HintBasedSolution(),
-];
+import { solutions } from "./4_5";
 
 describe.each(solutions)("isBinarySearchTree", (solution) => {
   const name = solution.constructor.name;

@@ -50,3 +50,5 @@ export class TheirBreadthFirstSolution implements Solution {
     throw new Error();
   }
 }
+
+export const solutions = [new MySolution()];

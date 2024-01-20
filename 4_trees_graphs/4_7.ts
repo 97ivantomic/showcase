@@ -111,3 +111,5 @@ export class Project {
     this.clients.clear();
   }
 }
+
+export const solutions = [new BruteForceSolution()];

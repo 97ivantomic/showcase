@@ -1,15 +1,6 @@
 import { BinarySearchTree } from "../models/graph";
-import {
-  BruteForceSolution,
-  OfficialSolution,
-  WrongHintBasedSolution,
-} from "./4_6";
 
-const solutions = [
-  new BruteForceSolution(),
-  new WrongHintBasedSolution(),
-  new OfficialSolution(),
-];
+import { solutions } from "./4_6";
 
 describe.each(solutions)("getSuccessor", (solution) => {
   const name = solution.constructor.name;

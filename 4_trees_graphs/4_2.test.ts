@@ -1,8 +1,6 @@
 import { BinaryTree, printTree } from "../models/graph";
 
-import { MySolution, OfficialSolution, Solution } from "./4_2";
-
-const solutions: Solution[] = [new MySolution(), new OfficialSolution()];
+import { solutions } from "./4_2";
 
 describe.each(solutions)("createBinarySearchTree", (solution) => {
   const name = solution.constructor.name;

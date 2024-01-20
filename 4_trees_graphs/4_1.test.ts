@@ -1,14 +1,5 @@
-import {
-  // BidirectionalSearchSolution,
-  BruteForceSolution,
-  Solution,
-} from "./4_1";
+import { solutions } from "./4_1";
 import { GraphNode } from "../models/graph";
-
-const solutions: Solution[] = [
-  new BruteForceSolution(),
-  // new BidirectionalSearchSolution(),
-];
 
 describe.each(solutions)("solution", (solution) => {
   const name = solution.constructor.name;

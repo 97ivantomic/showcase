@@ -1,18 +1,7 @@
 import { BinaryTree } from "../models/graph";
 import { LinkedList, Node as LLNode } from "../models/linked_list";
 
-import {
-  MySolution,
-  Solution,
-  TheirBreadthFirstSolution,
-  TheirPreOrderTraversalSolution,
-} from "./4_3";
-
-const solutions: Solution[] = [
-  new MySolution(),
-  // new TheirPreOrderTraversalSolution(),
-  // new TheirBreadthFirstSolution()
-];
+import { solutions } from "./4_3";
 
 describe.each(solutions)("createLinkedList", (solution) => {
   const name = solution.constructor.name;
