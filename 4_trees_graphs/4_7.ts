@@ -12,6 +12,10 @@ export interface Solution {
   findProjectBuildOrder(graph: DependencyGraph): ProjectBuildOrder | null;
 }
 
+/**
+ * @todo Mark dependencies as satisfied instead of removing clients
+ * for the sake of readabilty.
+ */
 export class BruteForceSolution implements Solution {
   findProjectBuildOrder(graph: DependencyGraph) {
     if (graph.size <= 1) {
