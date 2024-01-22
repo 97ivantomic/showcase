@@ -1,5 +1,5 @@
 import { BinaryTree } from "../models/graph";
-import { LinkedList, Node as LLNode } from "../models/linked_list";
+import { LinkedList } from "../models/linked_list";
 
 import { solutions } from "./4_3";
 
@@ -9,7 +9,7 @@ describe.each(solutions)("createLinkedList", (solution) => {
   test(`${name}: with a single node`, () => {
     const given = BT(1);
     const actual = solution.createLinkedList(given);
-    expect(actual).toEqual({ 0: LLN(BT(1)) });
+    expect(actual).toEqual({ 0: new LinkedList(given) });
   });
 
   test(`${name}: with two levels`, () => {
@@ -21,20 +21,12 @@ describe.each(solutions)("createLinkedList", (solution) => {
     const actual = solution.createLinkedList(tree);
 
     expect(actual).toEqual({
-      0: LLN(first),
-      1: LLN(second).withNext(LLN(third)),
+      0: new LinkedList(first),
+      1: new LinkedList(second).append(third),
     });
   });
 });
 
 function BT(value: number) {
   return new BinaryTree(value);
-}
-
-function LList(head: LLNode<number>) {
-  return new LinkedList(head);
-}
-
-function LLN(value: BinaryTree<number>) {
-  return new LLNode(value);
 }

@@ -1,12 +1,12 @@
 import { BinaryTree, visitBreadthFirst } from "../models/graph";
-import { Node as LLNode } from "../models/linked_list";
+import { LinkedList } from "../models/linked_list";
 
 export interface Solution {
   createLinkedList(tree: BinaryTree<number>): LevelToNodes;
 }
 
 export interface LevelToNodes {
-  [x: number]: LLNode<BinaryTree<number>>;
+  [x: number]: LinkedList<BinaryTree<number>>;
 }
 
 /**
@@ -17,25 +17,18 @@ export interface LevelToNodes {
 export class MySolution implements Solution {
   createLinkedList(tree: BinaryTree<number>): LevelToNodes {
     // space: O(tree depth)
-    const levelToTail: LevelToNodes = {};
-    const levelToHead: LevelToNodes = {};
+    const levelToNodes: LevelToNodes = {};
 
     // time: O(tree nodes)
     // space: O(tree nodes)
-    for (const { node: treeNode, distance: level } of visitBreadthFirst(tree)) {
-      const linkedListNode = new LLNode(treeNode);
-
-      if (levelToTail[level] === undefined) {
-        levelToTail[level] = linkedListNode;
-        levelToHead[level] = linkedListNode;
-        continue;
+    for (const { node, distance: level } of visitBreadthFirst(tree)) {
+      if (levelToNodes[level] === undefined) {
+        levelToNodes[level] = new LinkedList();
       }
-
-      levelToTail[level].next = linkedListNode;
-      levelToTail[level] = linkedListNode;
+      levelToNodes[level].append(node);
     }
 
-    return levelToHead;
+    return levelToNodes;
   }
 }
 
