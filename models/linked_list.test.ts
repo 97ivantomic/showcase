@@ -1,4 +1,4 @@
-import { LinkedList, Node } from "./linked_list";
+import { LinkedList, Node as LLNode } from "./linked_list";
 
 describe("LinkedList", () => {
   describe("constructor", () => {
@@ -9,10 +9,35 @@ describe("LinkedList", () => {
   });
 
   describe("iterator protocol", () => {
-    it("is implemented", () => {
+    test("with an empty list", () => {
+      const list = new LinkedList();
+      const elements = [...list];
+      expect(elements).toEqual([]);
+    });
+
+    test("with a non-empty list", () => {
       const list = new LinkedList(1, 2, 3);
       const elements = [...list];
       expect(elements).toEqual([1, 2, 3]);
+    });
+  });
+
+  describe("nodes", () => {
+    test("with an empty list", () => {
+      const list = new LinkedList();
+      const elements = [...list.nodes];
+      expect(elements).toEqual([]);
+    });
+
+    test("with a non-empty list", () => {
+      const first = new LLNode(null);
+      const second = new LLNode(null);
+      first.next = second;
+      const list = new LinkedList<null>().appendNode(first).appendNode(second);
+
+      const elements = [...list.nodes];
+
+      expect(elements).toEqual([first, second]);
     });
   });
 

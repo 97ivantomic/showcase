@@ -7,11 +7,13 @@ export class LinkedList<TValue = undefined> implements Iterable<TValue> {
   }
 
   *[Symbol.iterator]() {
-    let iNode = this.head;
-    while (iNode) {
-      yield iNode.value;
-      iNode = iNode.next;
+    for (const node of this.yieldNodes()) {
+      yield node.value;
     }
+  }
+
+  get nodes() {
+    return this.yieldNodes();
   }
 
   get(index: number) {
@@ -30,25 +32,36 @@ export class LinkedList<TValue = undefined> implements Iterable<TValue> {
    * Time: O(1)
    */
   append(value: TValue) {
-    if (!this.head) {
-      this.initializeWithValue(value);
-      return this;
-    }
+    return this.appendNode(new Node(value));
+  }
 
-    this.appendToTail(value);
+  /**
+   * Time: O(1)
+   */
+  appendNode(node: Node<TValue>) {
+    return this.head
+      ? this.appendNodeToTail(node)
+      : this.initializeWithNode(node);
+  }
+
+  private initializeWithNode(node: Node<TValue>) {
+    this.head = node;
+    this.tail = node;
     return this;
   }
 
-  private initializeWithValue(value: TValue) {
-    const node = new Node(value);
-    this.head = node;
-    this.tail = node;
-  }
-
-  private appendToTail(value: TValue) {
-    const node = new Node(value);
+  private appendNodeToTail(node: Node<TValue>) {
     this.tail!.next = node;
     this.tail = node;
+    return this;
+  }
+
+  private *yieldNodes() {
+    let iNode = this.head;
+    while (iNode) {
+      yield iNode;
+      iNode = iNode.next;
+    }
   }
 }
 
