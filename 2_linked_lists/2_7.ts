@@ -101,8 +101,11 @@ export class HintBasedSolution implements Solution {
       return null;
     }
 
-    const [smaller, larger] = this.sortBySize([first, second]);
-    const sizeDifference = larger.size - smaller.size;
+    const {
+      smaller,
+      larger,
+      difference: sizeDifference,
+    } = this.compareBySize(first, second);
 
     const largerIterator = larger.nodes;
     const smallerIterator = smaller.nodes;
@@ -131,8 +134,9 @@ export class HintBasedSolution implements Solution {
     }
   }
 
-  private sortBySize<V>(lists: LinkedList<V>[]) {
-    return lists.sort((a, b) => (a.size < b.size ? -1 : 1));
+  private compareBySize<V>(first: LinkedList<V>, second: LinkedList<V>) {
+    const [smaller, larger] = [first, second].sort((a, b) => a.size - b.size);
+    return { smaller, larger, difference: larger.size - smaller.size };
   }
 }
 
