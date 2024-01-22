@@ -62,38 +62,9 @@ export class SecondBruteForceSolution implements Solution {
 }
 
 /**
- * Time: O(F + S)
+ * Time: O(M + N)
  * Aux. space: none
- * where F = size of the first linked list
- *   and S = size of the second linked list
- */
-export class TailBasedSolution implements Solution {
-  findIntersection<V>(first: LinkedList<V>, second: LinkedList<V>) {
-    if (first === second) {
-      return null;
-    }
-
-    const firstTail = first.tail;
-    const secondTail = second.tail;
-
-    for (const candidate of first.nodes) {
-      if (candidate === secondTail) {
-        return candidate;
-      }
-    }
-    for (const candidate of second.nodes) {
-      if (candidate === firstTail) {
-        return candidate;
-      }
-    }
-    return null;
-  }
-}
-
-/**
- * Time: O(N)
- * Aux. space: none
- * where N = size of the larger linked list
+ * where N and M are sizes of linked lists
  */
 export class HintBasedSolution implements Solution {
   findIntersection<V>(first: LinkedList<V>, second: LinkedList<V>) {
@@ -143,6 +114,5 @@ export class HintBasedSolution implements Solution {
 export const solutions = [
   new FirstBruteForceSolution(),
   new SecondBruteForceSolution(),
-  new TailBasedSolution(),
   new HintBasedSolution(),
 ];

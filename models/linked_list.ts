@@ -1,14 +1,12 @@
 export class LinkedList<TValue = undefined> implements Iterable<TValue> {
   private _head?: Node<TValue>;
-  private _tail?: Node<TValue>;
-  private _size = 0;
 
   constructor(...values: TValue[]) {
-    values.forEach(this.append.bind(this));
+    this.append(...values);
   }
 
   *[Symbol.iterator]() {
-    for (const node of this.yieldNodes()) {
+    for (const node of this.nodes) {
       yield node.value;
     }
   }
@@ -17,59 +15,52 @@ export class LinkedList<TValue = undefined> implements Iterable<TValue> {
     return this.yieldNodes();
   }
 
-  /**
-   * Time: O(1)
-   */
-  get tail() {
-    return this._tail;
+  get head() {
+    return this._head;
   }
 
-  /**
-   * Time: O(1)
-   */
+  get tail() {
+    let node;
+    for (node of this.nodes) {
+      continue;
+    }
+    return node;
+  }
+
   get size() {
-    return this._size;
+    let size = 0;
+    for (const node of this.nodes) {
+      size += 1;
+    }
+    return size;
   }
 
   get(index: number) {
-    let iNode = this._head;
-    try {
-      for (let i = 0; i < index; i++) {
-        iNode = iNode!.next;
+    let i = 0;
+    for (const node of this.nodes) {
+      if (i === index) {
+        return node.value;
       }
-      return iNode!.value;
-    } catch (e) {
-      throw new RangeError();
+      i += 1;
     }
+    throw new RangeError();
   }
 
-  /**
-   * Time: O(1)
-   */
-  append(value: TValue) {
-    return this.appendNode(new Node(value));
+  append(...values: TValue[]) {
+    const extension = this.linkTogether(values);
+    if (!extension) {
+      return this;
+    }
+    return this.appendNode(extension);
   }
 
-  /**
-   * Time: O(1)
-   */
   appendNode(node: Node<TValue>) {
-    return this._head
-      ? this.appendNodeToTail(node)
-      : this.initializeWithNode(node);
-  }
+    if (!this._head) {
+      this._head = node;
+      return this;
+    }
 
-  private initializeWithNode(node: Node<TValue>) {
-    this._head = node;
-    this._tail = node;
-    this._size += 1;
-    return this;
-  }
-
-  private appendNodeToTail(node: Node<TValue>) {
-    this._tail!.next = node;
-    this._tail = node;
-    this._size += 1;
+    this.tail!.next = node;
     return this;
   }
 
@@ -79,6 +70,22 @@ export class LinkedList<TValue = undefined> implements Iterable<TValue> {
       yield iNode;
       iNode = iNode.next;
     }
+  }
+
+  private linkTogether(values: TValue[]): Node<TValue> | null {
+    if (!values.length) {
+      return null;
+    }
+    const head = new Node(values[0]);
+    let tail = head;
+    values
+      .slice(1)
+      .map((value) => new Node(value))
+      .forEach((node) => {
+        tail.next = node;
+        tail = node;
+      });
+    return head;
   }
 }
 

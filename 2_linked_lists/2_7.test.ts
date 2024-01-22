@@ -35,7 +35,7 @@ describe.each(solutions)("findIntersection", (solution) => {
     const commonNode = new LLNode(100);
     const first = new LinkedList(1, 2, 3);
     const second = new LinkedList<number>(5);
-    first.appendNode(commonNode);
+    first.appendNode(commonNode).append(10, 20, 30);
     second.appendNode(commonNode);
 
     const actual = solution.findIntersection(first, second);
