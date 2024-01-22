@@ -1,4 +1,4 @@
-import { LinkedList, Node } from "./linked_list";
+import { LinkedList, Node as LLNode } from "./linked_list";
 
 describe("LinkedList", () => {
   describe("constructor", () => {
@@ -9,10 +9,66 @@ describe("LinkedList", () => {
   });
 
   describe("iterator protocol", () => {
-    it("is implemented", () => {
+    test("with an empty list", () => {
+      const list = new LinkedList();
+      const elements = [...list];
+      expect(elements).toEqual([]);
+    });
+
+    test("with a non-empty list", () => {
       const list = new LinkedList(1, 2, 3);
       const elements = [...list];
       expect(elements).toEqual([1, 2, 3]);
+    });
+  });
+
+  describe("nodes", () => {
+    test("with an empty list", () => {
+      const list = new LinkedList();
+      const elements = [...list.nodes];
+      expect(elements).toEqual([]);
+    });
+
+    test("with a non-empty list", () => {
+      const first = new LLNode(undefined);
+      const second = new LLNode(undefined);
+      first.next = second;
+      const list = new LinkedList().appendNode(first).appendNode(second);
+
+      const elements = [...list.nodes];
+
+      expect(elements).toEqual([first, second]);
+    });
+  });
+
+  describe("tail", () => {
+    test("with an empty list", () => {
+      expect(new LinkedList().tail).toBe(undefined);
+    });
+
+    test("with a single element", () => {
+      expect(new LinkedList(1).tail).toEqual(new LLNode(1));
+    });
+
+    test("with multiple elements", () => {
+      const last = new LLNode(3);
+      const list = new LinkedList(1, 2).appendNode(last);
+
+      expect(list.tail).toBe(last);
+    });
+  });
+
+  describe("size", () => {
+    test("with an empty list", () => {
+      expect(new LinkedList().size).toBe(0);
+    });
+
+    test("with a single element", () => {
+      expect(new LinkedList(1).size).toBe(1);
+    });
+
+    test("with multiple elements", () => {
+      expect(new LinkedList(1, 2, 3).size).toBe(3);
     });
   });
 

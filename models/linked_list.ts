@@ -1,21 +1,38 @@
 export class LinkedList<TValue = undefined> implements Iterable<TValue> {
-  private head?: Node<TValue>;
-  private tail?: Node<TValue>;
+  private _head?: Node<TValue>;
+  private _tail?: Node<TValue>;
+  private _size = 0;
 
   constructor(...values: TValue[]) {
     values.forEach(this.append.bind(this));
   }
 
   *[Symbol.iterator]() {
-    let iNode = this.head;
-    while (iNode) {
-      yield iNode.value;
-      iNode = iNode.next;
+    for (const node of this.yieldNodes()) {
+      yield node.value;
     }
   }
 
+  get nodes() {
+    return this.yieldNodes();
+  }
+
+  /**
+   * Time: O(1)
+   */
+  get tail() {
+    return this._tail;
+  }
+
+  /**
+   * Time: O(1)
+   */
+  get size() {
+    return this._size;
+  }
+
   get(index: number) {
-    let iNode = this.head;
+    let iNode = this._head;
     try {
       for (let i = 0; i < index; i++) {
         iNode = iNode!.next;
@@ -30,25 +47,38 @@ export class LinkedList<TValue = undefined> implements Iterable<TValue> {
    * Time: O(1)
    */
   append(value: TValue) {
-    if (!this.head) {
-      this.initializeWithValue(value);
-      return this;
-    }
+    return this.appendNode(new Node(value));
+  }
 
-    this.appendToTail(value);
+  /**
+   * Time: O(1)
+   */
+  appendNode(node: Node<TValue>) {
+    return this._head
+      ? this.appendNodeToTail(node)
+      : this.initializeWithNode(node);
+  }
+
+  private initializeWithNode(node: Node<TValue>) {
+    this._head = node;
+    this._tail = node;
+    this._size += 1;
     return this;
   }
 
-  private initializeWithValue(value: TValue) {
-    const node = new Node(value);
-    this.head = node;
-    this.tail = node;
+  private appendNodeToTail(node: Node<TValue>) {
+    this._tail!.next = node;
+    this._tail = node;
+    this._size += 1;
+    return this;
   }
 
-  private appendToTail(value: TValue) {
-    const node = new Node(value);
-    this.tail!.next = node;
-    this.tail = node;
+  private *yieldNodes() {
+    let iNode = this._head;
+    while (iNode) {
+      yield iNode;
+      iNode = iNode.next;
+    }
   }
 }
 
