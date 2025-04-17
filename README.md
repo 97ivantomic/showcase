@@ -1,6 +1,4 @@
-# Interview prep
-
-This repo is my playground for data structures and algorithms.
+# Showcase
 
 Due to a lack of an actual open-source project to share, I've made this
 repo public to serve as an example of my **coding style** and maybe some
