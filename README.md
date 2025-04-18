@@ -1,11 +1,10 @@
 # Showcase
 
 Due to a lack of an actual open-source project to share, I've made this
-repo public to serve as an example of my **coding style** and maybe some
-analytical skills or technical knowledge — or lack thereof — but mostly style.
+repo public to serve as an example of my **coding style** and possibly as an example of
+analytical skills and technical knowledge — or lack thereof.
 
-For example, I tend to favor readability over everything else
-and like making unit tests go from red to green.
+I tend to favor readability over everything else.
 
 ## Some highlights:
 
